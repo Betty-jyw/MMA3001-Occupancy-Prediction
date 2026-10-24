@@ -185,4 +185,58 @@ Logistic Regression achieved the highest accuracy and F1-score among the evaluat
 However, its monthly accuracy varied between **63.70% and 78.02%**, demonstrating that predictive performance was not constant over time.
 
 
+---
+
+## Repository Structure
+
+- `data/` — Project datasets and data information
+- `notebooks/` — Five Jupyter notebooks covering the complete workflow
+- `src/` — Reusable Python source code
+- `tests/` — Automated pytest tests
+- `docs/` — HTML source code documentation generated using pdoc
+- `results/` — Experimental outputs and test reports
+
+## Installation
+
+The project was developed using Python and Google Colab.
+
+Main dependencies:
+
+- NumPy
+- pandas
+- scikit-learn
+- Matplotlib
+- pytest
+- pdoc
+
+Install dependencies using:
+
+```bash
+pip install numpy pandas scikit-learn matplotlib pytest pdoc
+```
+
+## How to Run
+
+1. Obtain the authorised MMA3001 occupancy sensor dataset.
+2. Prepare the Google Drive project directory and update file paths if necessary.
+3. Open the notebooks in Google Colab.
+4. Execute the notebooks in the following order:
+   - `01_data_exploration.ipynb`
+   - `02_feature_engineering.ipynb`
+   - `03_model_development.ipynb`
+   - `04_model_evaluation.ipynb`
+   - `05_final_results.ipynb`
+
+To run the automated tests:
+
+```bash
+python -m pytest tests/test_occupancy.py -v
+```
+
+The recorded test results were **3 passed**.
+
+HTML documentation is available in `docs/index.html`.
+
+The raw sensor data are subject to the original data access and redistribution conditions.
+
 The study uses historical data and does not demonstrate real-time building system deployment.
