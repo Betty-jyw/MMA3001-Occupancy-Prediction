@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.16, pytest-8.4.2, pluggy-1.7.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /content/drive/MyDrive/MMA3001_Project
+plugins: platformdirs-4.13.5, anyio-4.15.1, typeguard-4.6.0, langsmith-0.14.11
+collecting ... collected 3 items
+
+tests/test_occupancy.py::test_future_target_alignment PASSED             [ 33%]
+tests/test_occupancy.py::test_historical_feature_alignment PASSED        [ 66%]
+tests/test_occupancy.py::test_invalid_future_step PASSED                 [100%]
+
+============================== 3 passed in 1.22s ===============================
+
