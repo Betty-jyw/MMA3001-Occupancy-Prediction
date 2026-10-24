@@ -1,71 +1,83 @@
+
 # MMA3001 Occupancy Prediction
 
 ## Project Overview
 
-The project investigates whether historical occupancy sensor data can be used to predict the future occupancy status of a selected building space.
+This project develops and evaluates machine learning models to predict room occupancy **30 minutes into the future** using historical occupancy sensor data.
 
-The initial prediction task is to predict whether the selected space will be occupied 30 minutes into the future using historical occupancy information and time-related features.
+The project was completed as part of **MMA3001 — Numerical Methods and Machine Learning** at Monash University.
 
+The computational workflow includes:
+
+- Data exploration
+- Data preprocessing
+- Feature engineering
+- Model development
+- Model validation
+- Performance evaluation
+- Interpretation of results
+
+Three prediction approaches were evaluated:
+
+1. **Persistence Baseline**
+2. **Logistic Regression**
+3. **Random Forest**
+
+**Logistic Regression achieved the highest overall test accuracy (71.68%) and F1-score (0.8052).**
+
+---
 
 ## Engineering Problem and Aim
 
-Building occupancy changes over time and can affect how building spaces and resources are managed. Being able to predict future occupancy may provide useful information for building operation and space management.
+Building occupancy varies throughout the day and can influence the operation of:
 
-The aim of this project is to develop and evaluate a computational model that uses historical occupancy sensor data to predict whether a selected building space will be occupied 30 minutes into the future.
+- Heating systems
+- Ventilation systems
+- Air conditioning systems
+- Lighting systems
+- Space management systems
+
+Predicting future room occupancy may help building management systems anticipate changes in space usage.
+
+The aim of this project is to **develop and evaluate a reproducible machine learning workflow** for predicting whether a selected building space will be occupied 30 minutes into the future.
 
 ### Research Question
 
-Can historical occupancy patterns be used to predict whether a selected building space will be occupied 30 minutes into the future?
+**Can historical occupancy patterns and time-related features improve 30-minute-ahead room occupancy prediction compared with a simple persistence baseline?**
+
+---
 
 ## Dataset
 
-The project uses occupancy sensor data provided for MMA3001. The main dataset contains time-stamped occupancy observations from building spaces.
+The project uses occupancy sensor data provided for **MMA3001**.
 
-The available occupancy data includes information such as:
+The original occupancy dataset contains approximately **9.09 million time-stamped records** across five floor spaces.
 
-- device ID
-- floor-space ID
-- occupancy status
-- headcount
-- collection timestamp
-- occupancy-status change timestamp
-- previous occupancy status
+One building space was selected for detailed analysis.
 
-A separate sensor ID and location mapping file is also provided. This file contains building, room/area, sensor, floor, and space identification information. The mapping information will be investigated to determine whether occupancy records can be reliably associated with specific building spaces.
+The raw occupancy observations were processed into a regular **five-minute time series**, and a binary occupancy target was constructed for **30 minutes into the future**.
 
-## Planned Methodology
+The final feature dataset contains **107,059 valid observations**, including historical occupancy features and time-related variables.
 
-The project will follow the workflow below:
+### Input Features
 
-1. **Data Exploration and Auditing**
-   - Inspect the structure, time range, missing values, duplicate records, occupancy states, and available building spaces.
-   - Investigate the sensor-location mapping and identify a suitable space with sufficient and reliable occupancy data.
+The models use **10 input features**, including:
 
-2. **Data Preprocessing**
-   - Convert timestamps into appropriate datetime formats.
-   - Clean and organise occupancy records.
-   - Define the occupancy prediction target.
-   - Create time-related and historical occupancy features using information available at the time of prediction.
+- **Current occupancy state**
+- **Historical occupancy states** at 5-minute intervals
+- **Recent occupancy rate**
+- **Hour of day**
+- **Day of week**
 
-3. **Exploratory Data Analysis**
-   - Analyse occupancy patterns by time of day and day of week.
-   - Investigate occupancy-state and headcount distributions.
-   - Examine temporal occupancy patterns for the selected building space.
+### Prediction Output
 
-4. **Future Occupancy Prediction**
-   - Construct a 30-minute-ahead occupancy prediction task.
-   - Develop a simple baseline model.
-   - Develop and compare alternative machine-learning models.
+The model predicts a **binary room occupancy state 30 minutes ahead**:
 
-5. **Validation and Model Comparison**
-   - Use a time-based training and testing strategy to evaluate prediction on later observations.
-   - Compare models using appropriate classification metrics such as accuracy, precision, recall, F1-score, and confusion matrices.
-   - Compare computational performance where appropriate.
+- `0` — **Unoccupied**
+- `1` — **Occupied**
 
-6. **Sensitivity and Performance Analysis**
-   - Investigate how prediction performance changes with prediction horizon, such as 10, 30, and 60 minutes.
-   - Investigate relevant model settings and computational cost where appropriate.
+### Data Limitations
 
-7. **Engineering Interpretation**
-   - Interpret the results in the context of building-space occupancy prediction.
-   - Identify limitations, failure cases, and possible improvements.
+Environmental sensor data were not incorporated because a reliable spatial match to the selected occupancy space could not be established.
+
+The study uses historical data and does not demonstrate real-time building system deployment.
